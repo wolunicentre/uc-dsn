@@ -1,0 +1,57 @@
+.infobox {
+	float: left;
+	font-size: small;
+	margin-top: 2px;
+	margin-left: 10px;
+	padding: 2px;
+	width: 30%;
+}
+	
+.flabel {
+	float: left;
+	width: 22%;
+}
+
+input {
+	float: left;
+	width: 13%;
+}
+
+#container {
+	width: 75%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+	
+#mform {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.button {
+	border: 1px solid black;
+	width: 13%;
+	border-collapse: collapse;
+	padding: 5px;
+	float: left;
+	margin-left: -1px;
+}
+
+.fbutton {
+	border: 1px solid black;
+	width: 13%;
+	border-collapse: collapse;
+	padding: 5px;
+	float: left;
+}
+
+#datatab {
+	margin-top: -1px;
+	padding: 5px;
+}
+
+body {
+	overflow-y: scroll;
+}
