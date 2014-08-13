@@ -17,6 +17,8 @@ function viewMarketAlleyEvents() {
 	$sql = 'select * from ma_dates';
 	$sqlp = ociparse($confeed, $sql);
 	
+	echo "<div style='padding: 2px; overflow: auto;'><div style='float: left; width: 30%'><h4>Market Alley</h4></div></div>";
+	
 	if (ociexecute($sqlp, OCI_DEFAULT)) {
 		echo "<div style='padding: 2px; border-bottom: 1px solid black; overflow: auto;'><div style='float: left; width: 30%'><h5>Date</h5></div></div>";
 		while (ocifetchinto($sqlp, $data, OCI_BOTH)) {
@@ -43,6 +45,8 @@ function viewLunchOnLawnEvents() {
 	$sql = "select * from dsn_lol_info";
 	$sqlp = ociparse($concon, $sql);
 	
+	echo "<div style='padding: 2px; overflow: auto;'><div style='float: left; width: 30%'><h4>Lunch on the Lawn</h4></div></div>";
+	
 	if (ociexecute($sqlp, OCI_DEFAULT)) {
 		echo "<div style='padding: 2px; border-bottom: 1px solid black; overflow: auto;'><div style='float: left; width: 30%'><h5>Date</h5></div><div style='width: 30%;float:left;'><h5>Artist / Event</h5></div></div>";
 		while (ocifetchinto($sqlp, $data, OCI_BOTH)) {
@@ -67,6 +71,8 @@ function viewAcousticSessionsEvents() {
 	$row = 0;
 	$sql = "select * from dsn_as_info";
 	$sqlp = ociparse($concon, $sql);
+	
+	echo "<div style='padding: 2px; overflow: auto;'><div style='float: left; width: 30%'><h4>Acoustic Sessions</h4></div></div>";
 	
 	if (ociexecute($sqlp, OCI_DEFAULT)) {
 		echo "<div style='padding: 2px; border-bottom: 1px solid black; overflow: auto;'><div style='float: left; width: 30%'><h5>Date</h5></div><div style='width: 30%;float:left;'><h5>Time</h5></div><div style='width: 30%;float:left;'><h5>Artist / Event</h5></div></div>";
