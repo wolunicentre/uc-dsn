@@ -8,24 +8,19 @@
 // Author: Glenn Harris (gharris@uow.edu.au)
 // **********************************************
 
-include("db.php");
+include ("dsnfunc.php");
 
-function viewAllEvents($dsnType) {
-	$row = 0;
-	global $confeed;
-	
-	$sql = "<PUT SCRIPT HERE>";
-	$sqlp = ociparse($confeed, $sql);
-	if (ociexecute($sqlp, OCI_DEFAULT)) {
-		while (ocifetchinto($sqlp, $data, OCI_BOTH)) {
-			echo "<INSERT FORMATTING AND DATA>";
-			row++;
-		}
-	}
-	else {
-		$e = ocierror($sqlp);
-		printf ($e'[message']);
-		return false;
-	}
+$q = $_GET["q"];
+
+switch ($q) {
+	case 1:
+		viewLunchOnLawnEvents();
+		break;
+	case 2:
+		viewMarketAlleyEvents();
+		break;
+	case 3:
+		viewAcousticSessionsEvents();
+		break;
 }
-?>	
+?>

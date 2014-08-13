@@ -8,13 +8,17 @@
 }
 	
 .flabel {
-	float: left;
+	
 	width: 22%;
 }
 
-input {
+input, select {
 	float: left;
 	width: 20%;
+}
+
+.inp {
+	float: left;
 }
 
 #container {
