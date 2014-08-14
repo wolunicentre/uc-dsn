@@ -64,7 +64,7 @@ function setStyle(str, type) {
 	}
 }
 
-function addEvent(str) {
+function addEvent(str, date, performer, time) {
 	var dt = document.getElementById("datatab");
 	dt.innerHTML = "";
 	setStyle(dt, 'nor');
@@ -84,7 +84,8 @@ function addEvent(str) {
 		}
 	}
 	
-	//xmlhttp.open("GET", "addevent.php
+	xmlhttp.open("GET", "addevent.php?q="+str+"&d="+date+"&p="+performer+"&t="+time, true);
+	xmlhttp.send();
 }
 </script>
 		
@@ -112,6 +113,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	</select>
 	<div class="flabel">Date</div>
 	<input type="date" class="text-input" name="d" id="d"/>
+	<div class="flabel">Time</div>
+	<input type="time" class="text-input" name="t" id="t"/>
 	<div id="stuDetails" class="infobox"></div>
 	<div class="flabel">Artist / Event Name</div>
 	<input type="text" class="text-input" name="ae" id="ae" />
@@ -119,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 </div>
 <div style="clear:both"></div>
 <div style="height: 20px;"></div>
-<div id="addevent" class="fbutton"><a href='#'>Add</a></div>
+<div id="addevent" class="fbutton"><a href='#' onClick="addEvent(dsnf.dtype.value, dsnf.d.value, dsnf.ae.value, dsnf.t.value);">Add</a></div>
 <div id="showall" class="button"><a href='#' onClick="showCurrentEvents(dsnf.dtype.value);">Show DSN Events</a></div>
 <div style="clear:both"></div>
 <div id="datatab"></div>
