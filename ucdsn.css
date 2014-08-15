@@ -36,7 +36,7 @@ input, select {
 
 .button {
 	border: 1px solid black;
-	width: 13%;
+	min-width: 20%;
 	border-collapse: collapse;
 	padding: 5px;
 	float: left;
@@ -45,7 +45,7 @@ input, select {
 
 .fbutton {
 	border: 1px solid black;
-	width: 13%;
+	min-width: 13%;
 	border-collapse: collapse;
 	padding: 5px;
 	float: left;

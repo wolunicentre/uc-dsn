@@ -14,7 +14,7 @@ include("db.php");
 function viewMarketAlleyEvents() {
 	global $confeed;
 	$row = 0;
-	$sql = 'select * from ma_dates';
+	$sql = 'select * from ma_dates order by madate desc';
 	$sqlp = ociparse($confeed, $sql);
 	
 	echo "<div style='padding: 2px; overflow: auto;'><div style='float: left; width: 30%'><h4>Market Alley</h4></div></div>";
@@ -42,7 +42,7 @@ function viewMarketAlleyEvents() {
 function viewLunchOnLawnEvents() {
 	global $concon;
 	$row = 0;
-	$sql = "select * from dsn_lol_info";
+	$sql = "select * from dsn_lol_info order by lol_date desc";
 	$sqlp = ociparse($concon, $sql);
 	
 	echo "<div style='padding: 2px; overflow: auto;'><div style='float: left; width: 30%'><h4>Lunch on the Lawn</h4></div></div>";
@@ -70,7 +70,7 @@ function viewLunchOnLawnEvents() {
 function viewAcousticSessionsEvents() {
 	global $concon;
 	$row = 0;
-	$sql = "select * from dsn_as_info";
+	$sql = "select * from dsn_as_info order by as_date desc";
 	$sqlp = ociparse($concon, $sql);
 	
 	echo "<div style='padding: 2px; overflow: auto;'><div style='float: left; width: 30%'><h4>Acoustic Sessions</h4></div></div>";
@@ -92,7 +92,8 @@ function viewAcousticSessionsEvents() {
 // This function inserts Lunch on Lawn events
 function insertLunchOnLawn($date, $performer) {
 	global $concon;
-	$sql = "select dsn_lol_info.nextval as lol_id from dual";
+	$fdate = date('d-M-y', strtotime($date));
+	$sql = "select dsn_lol_id.nextval as lol_id from dual";
 	$sqlp = ociparse($concon, $sql);
 	
 	if (ociexecute($sqlp, OCI_DEFAULT)) {
@@ -108,7 +109,7 @@ function insertLunchOnLawn($date, $performer) {
 	$sql = "insert into dsn_lol_info (lol_id, lol_date, performer) values (:lol_id, :lol_date, :performer)";
 	$sqlp = ociparse($concon, $sql);
 	ocibindbyname($sqlp, ":lol_id", $lol_id);
-	ocibindbyname($sqlp, ":lol_date", $date);
+	ocibindbyname($sqlp, ":lol_date", $fdate);
 	ocibindbyname($sqlp, ":performer", $performer);
 	
 	if (ociexecute($sqlp, OCI_DEFAULT)) {
@@ -124,13 +125,13 @@ function insertLunchOnLawn($date, $performer) {
 // This function inserts Market Alley events
 function insertMarketAlley($date) {
 	global $confeed;
+	$fdate = date('d-M-y', strtotime($date));
 	$sql = "select ma_info.nextval as date_id from dual";
 	$sqlp = ociparse($confeed, $sql);
 	
 	if (ociexecute($sqlp, OCI_DEFAULT)) {
 		if (ocifetchinto($sqlp, $data, OCI_BOTH)) {
 			$date_id = $data['DATE_ID'];
-			echo $date_id;
 		}
 	}
 	else {
@@ -141,7 +142,7 @@ function insertMarketAlley($date) {
 	$sql = "insert into ma_dates (date_id, madate, active) values (:date_id, to_date(:madate, 'dd-mon-yyyy'), 1)";
 	$sqlp = ociparse($confeed, $sql);
 	ocibindbyname($sqlp, "date_id", $date_id);
-	ocibindbyname($sqlp, ":madate", $date);
+	ocibindbyname($sqlp, ":madate", $fdate);
 	
 	if (ociexecute($sqlp, OCI_DEFAULT)) {
 		ocicommit($confeed);
@@ -156,6 +157,7 @@ function insertMarketAlley($date) {
 // This function inserts Acoustic Sessions events
 function insertAcousticSessions($date, $performer, $time) {
 	global $concon;
+	$fdate = date('d-M-y', strtotime($date));
 	$sql = "select dsn_as_id.nextval as as_id from dual";
 	$sqlp = ociparse($concon, $sql);
 	
@@ -172,7 +174,7 @@ function insertAcousticSessions($date, $performer, $time) {
 	$sql = "insert into dsn_as_info (as_id, as_date, performer, as_time) values (:as_id, :as_date, :performer, :as_time)";
 	$sqlp = ociparse($concon, $sql);
 	ocibindbyname($sqlp, ":as_id", $as_id);
-	ocibindbyname($sqlp, ":as_date", $date);
+	ocibindbyname($sqlp, ":as_date", $fdate);
 	ocibindbyname($sqlp, ":performer", $performer);
 	ocibindbyname($sqlp, ":as_time", $as_time);
 	
